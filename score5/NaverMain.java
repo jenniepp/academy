@@ -15,7 +15,9 @@ public class NaverMain {
 				System.out.println("1.회원가입 2.전체회원출력 3.아이디검색 4.종료");
 				System.out.println("---------------");
 				System.out.print(":  ");
+				
 				ch=sc.nextInt();
+				
 			}while(ch<1);
 
 			try {
@@ -23,6 +25,7 @@ public class NaverMain {
 				switch(ch) {
 				case 1: nv.input(); break;
 				case 2: nv.print(); break;
+				case 3: nv.searchingId(); break;
 
 				default :
 					System.out.println("시스템을 종료합니다");
