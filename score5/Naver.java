@@ -5,12 +5,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-class NaverIdAuthen{
-	public static void inputFormat(String id) throws Exception{
 
+
+class NaverIdAuthen{
+	
+	
+	public void inputFormat(String id) throws Exception{
+			
 		if(id.length()>15||id.length()<8) {
 			throw new Exception("회원가입시 아이디는 반드시 8~15자 이내여야합니다.\n");}
-
+		
 		int eng=0, num=0;
 		for(int i=0;i<id.length();i++) {
 			char ch=id.charAt(i);
@@ -22,6 +26,7 @@ class NaverIdAuthen{
 			throw new Exception("회원가입시 아이디는 반드시 영문자 숫자를 혼용해야합니다.\n");
 
 		}
+		
 	}
 }
 
@@ -59,39 +64,39 @@ public class Naver {
 		
 		NaverVO vo=new NaverVO();
 		
-		int a = 0;
+		boolean panjung;
 		do {
 			try {
-				a=0;
+				panjung=true;
 				System.out.println("id를 입력하세요.");
 				vo.setId(sc.next());
 				
 				nid.inputFormat(vo.getId());
 
 			}catch (Exception e) {
-				a++;
+				panjung=false;
 				System.out.println(e.toString());
 
 			}
-		}while(a!=0);
+		}while(panjung!=true);
 		
-		int b = 0;
+		
 		do {
 			System.out.println("비밀번호를 입력해주세요.");
 			vo.setPassword(sc.next());
-
+			
 
 			try {
-				b=0;
+				panjung=true;
 				npw.inputFormat(vo.getPassword());
 
 
 			}catch (Exception e) {
-				b++;
+				panjung=false;
 				System.out.println(e.toString());
 
 			}
-		}while(b!=0);
+		}while(panjung!=true);
 		
 		System.out.println("이름을 입력해주세요.");
 		vo.setName(sc.next());
@@ -99,7 +104,7 @@ public class Naver {
 		System.out.println("성별을 적어주세요 [여자/남자]");
 		vo.setGender(sc.next());
 		
-		if(vo.getGender()!="여자"||vo.getGender()!="남자") {
+		if(!vo.getGender().equals("여자") && !vo.getGender().equals("남자")) {
 			throw new Exception("성별을 잘못입력하였습니다.\n");
 		}
 		
@@ -147,6 +152,29 @@ public class Naver {
 
 
 		}
+	}
+	
+	
+	
+	public void searchingId() {
+		
+		NaverVO vo=new NaverVO();
+		Iterator<NaverVO> it=lists.iterator();
+		
+		System.out.println("검색할 아이디를 입력해주세요.");
+		String std=sc.next();
+		
+		while(it.hasNext()) {
+			vo=it.next();
+			if(std.equals(vo.getId())) {
+				System.out.println(vo.toString());
+				return;
+			}else System.out.println("아이디를 찾을 수 없습니다.");
+		}
+		
+		
+		
+		
 	}
 }
 
