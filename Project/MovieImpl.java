@@ -13,7 +13,7 @@ public class MovieImpl implements Movie{
 	Scanner sc = new Scanner(System.in);
 
 	String[] futureMovieArr = {"헤어질 결심","미친능력","고스트랜드","보통의 용기","컴온컴온","토르:러브앤썬더",};
-	String[] fmDayArr = {"06/29","06/29","06/29","06/30","06/30","07/06"};
+	String[] fmDayArr = {"07/01","07/01","07/09","07/12","07/13","07/26"};
 	String[] presentMovieArr = {"마녀part2","브로커","범죄도시2","버즈라이트이어","쥬라기월드:도미니언","탑건:매버릭"};
 	Double[] perArr = {6.7, 1.5, 6.5, 0.7, 0.2, 43.1};
 	Double[] gradeArr = {8.2,8.1,9.7,8.6,8.4,9.8};
