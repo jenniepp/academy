@@ -26,8 +26,8 @@ public class MovieInfoMain extends Thread{
 				System.out.println("\t\t\t┃ 4. 영화순위                    ┃");
 				System.out.println("\t\t\t┃ 5. 뒤로가기                    ┃");
 				System.out.println("\t\t\t┗━━━━━━━━━━━━━━━━┛");
-				System.out.println("\t\t\t\t       ᕱ    ᕱ    ┃ ┃ ");
-				System.out.println("\t\t\t         ( ･ω･ )┃ ┃ ");
+				System.out.println("\t\t\t\t      ᕱ    ᕱ    ┃ ┃ ");
+				System.out.println("\t\t\t\t     ( ･ω･ )┃ ┃ ");
 				System.out.println("\t\t\t         /　  つ┃ Φ");
 				
 				
