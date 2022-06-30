@@ -31,10 +31,27 @@ public class MovieMain extends Thread {
 		
 		while(true) {
 			do{
+				
+				System.out.println("\t\t =================================================");
+				System.out.println("\t\t｜　 CGV     　　　　　　　　　 　[－] [ㅁ] [×] ｜");
+				System.out.println("\t\t =================================================");
+				System.out.println("\t\t｜                                               ｜");
+				System.out.println("\t\t｜   서비스를 이용하시려면 로그인이 필요합니다.  ｜");
+				System.out.println("\t\t｜                                               ｜");
+				System.out.println("\t\t｜　　 ---------------　　    ---------------    ｜");
+				System.out.println("\t\t｜ 　 ｜  1. 로그인  ｜　　  ｜ 2. 회원가입 ｜   ｜");
+				System.out.println("\t\t｜　　 ---------------　　    ---------------    ｜");
+				System.out.println("\t\t｜                                               ｜");
+				System.out.println("\t\t =================================================");
+				
+				
+				
+				/*
 				System.out.println();
 				System.out.println("[CGV] ");
 				System.out.println("서비스를 이용하시려면 로그인이 필요합니다.");
 				System.out.println("1.로그인 2.회원가입");
+				*/
 				ch=sc.nextInt();
 			}while(ch!=1 && ch!=2);
 
