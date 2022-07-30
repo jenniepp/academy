@@ -17,13 +17,16 @@
 <body>
 
 <br/><br/>
-<table  style="margin: auto;">
-	<tr><td class="title" height="40" align="center" >
+<table width="460" style="margin: auto;" >
+	<tr><td class="title"  height="40" colspan="2">
 	<b>이미지 게시판</b>
 	</td></tr>
-	<br/>
+	
 	<tr>
-		<td align="right" colspan="4">
+		<td align="left" colspan="1"><br/>
+		total : ${dataCount } articles, ${totalPage }page / Now page is ${currentPage}
+		</td>
+		<td align="right" colspan="1"><br/>
 		<input type="button" value="게시물 등록" onclick="location='<%=cp%>/image/write.do';"/>
 		</td>
 	</tr>
@@ -32,25 +35,35 @@
 <br/><br/>
 
 <table  style="margin: auto;">
+
+
+
 <c:forEach var="dto" items="${lists }" varStatus="status">
 	<c:if test="${status.count%3 == '1'}">
 	<tr>
 	</c:if>
-		<td align="center" width="185">
-		<img src="${imagePath }/${dto.saveFileName}" width="180" height="180"/>
-		<br/>${dto.subject } 삭제</td>
+		<td width="155" align="center">
+		<img src="${imagePath }/${dto.saveFileName}" width="150" height="200"/>
+		<br/>${dto.subject }
+		<a href="<%=cp%>/image/delete.do?num=${dto.num}" >삭제</a></td>
 	<c:if test="${status.count%3 == '0'}">
 	</tr>
 	</c:if>	
 </c:forEach>
-	
 
+	<c:if test="${dataCount%3==1 }">
+	<td width="155" ></td>
+	<td width="155" ></td>
+	</c:if>
+	<c:if test="${dataCount%3==2 }">
+	<td width="155" ></td>
+	</c:if>
 </table>
 
-<br/><br/>
+
 <center>
 <table>
-<tr><td>${pageIndexList}</td></tr>
+<tr><td>${pageIndexList} </td></tr>
 </table>
 </center>
 
