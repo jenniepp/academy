@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fileTest.FileTestDTO;
-import com.guest.GuestDTO;
 
 public class ImageTestDAO {
 
@@ -77,48 +75,48 @@ public class ImageTestDAO {
 		}
 	}
 
-	public List<ImageTestDTO> getlists(){
-
-		List<ImageTestDTO> lists=new ArrayList<ImageTestDTO>();
-
-		PreparedStatement pstmt = null;
-		ResultSet rs= null;
-		String sql;
-
-		try {
-
-			sql="select num,subject,saveFileName,originalFileName ";
-			sql+="from imageTest order by num desc";
-
-			pstmt = conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-
-			while(rs.next()) {
-				ImageTestDTO dto = new ImageTestDTO();
-
-				dto.setNum(rs.getInt("num"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setSaveFileName(rs.getString("saveFileName"));
-				dto.setOriginalFileName(rs.getString("originalFileName"));
-
-				lists.add(dto);
-
-			}
-
-			rs.close();
-			pstmt.close();
-
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		//여기서 리턴한 lists를 이제 html에서도 쓰고 그런다.. 어떻게? 하..
-		return lists;
-
-
-
-	}
-	
+//	public List<ImageTestDTO> getlists(){
+//
+//		List<ImageTestDTO> lists=new ArrayList<ImageTestDTO>();
+//
+//		PreparedStatement pstmt = null;
+//		ResultSet rs= null;
+//		String sql;
+//
+//		try {
+//
+//			sql="select num,subject,saveFileName,originalFileName ";
+//			sql+="from imageTest order by num desc";
+//
+//			pstmt = conn.prepareStatement(sql);
+//			rs=pstmt.executeQuery();
+//
+//			while(rs.next()) {
+//				ImageTestDTO dto = new ImageTestDTO();
+//
+//				dto.setNum(rs.getInt("num"));
+//				dto.setSubject(rs.getString("subject"));
+//				dto.setSaveFileName(rs.getString("saveFileName"));
+//				dto.setOriginalFileName(rs.getString("originalFileName"));
+//
+//				lists.add(dto);
+//
+//			}
+//
+//			rs.close();
+//			pstmt.close();
+//
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//		}
+//		
+//		//여기서 리턴한 lists를 이제 html에서도 쓰고 그런다.. 어떻게? 하..
+//		return lists;
+//
+//
+//
+//	}
+//	
 	List<ImageTestDTO> getLists(int start,int end){ //매개변수 없다. 전체 데이터 다 가져올것임
 
 		List<ImageTestDTO> lists = new ArrayList<ImageTestDTO>();
@@ -196,6 +194,81 @@ public class ImageTestDAO {
 		return dataCount;
 
 	}
+
+	public int deleteData(int num) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+
+		try {
+
+			sql = "delete imageTest where num=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+
+			result = pstmt.executeUpdate();
+
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+
+	}
+	
+public ImageTestDTO getReadData(int num) {
+		
+		ImageTestDTO dto = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			
+			
+			sql = "select num,subject,saveFileName,originalFileName ";
+			sql+= "from imageTest where num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				dto = new ImageTestDTO();
+				
+				dto.setNum(rs.getInt("num"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setSaveFileName(rs.getString("saveFileName"));
+				dto.setOriginalFileName(rs.getString("OriginalFileName"));
+				
+				
+				
+			}
+			
+			rs.close();
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
+		
+		
+	}
+	
+	
+	
+	
+
 
 
 }
