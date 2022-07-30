@@ -2,6 +2,8 @@ package com.imageTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.List;
 
@@ -11,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.BoardDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.util.DBConn;
+import com.util.FileManager;
 import com.util.MyPage;
 
 public class ImageTestServlet extends HttpServlet {
@@ -47,7 +49,8 @@ public class ImageTestServlet extends HttpServlet {
 		//파일 저장 경로 설정 : 여기까지의 코드가 잘 이해가지않음.. 아래 두줄 뭔뜻임?
 		String root = getServletContext().getRealPath("/");
 		String path = root + "pds" + File.separator + "imageFile";
-
+		//System.out.println(root + ", "+path);
+		
 		File f= new File(path);
 		if(!f.exists()) {
 			f.mkdirs();
@@ -92,8 +95,6 @@ public class ImageTestServlet extends HttpServlet {
 			
 		}else if(uri.indexOf("list.do")!=-1) {
 			
-			List<ImageTestDTO> list = dao.getlists();
-			//리스트 작업해주기
 			MyPage myPage = new MyPage();
 			
 			//이미지 불러올 imagePath만들어 주기
@@ -130,11 +131,31 @@ public class ImageTestServlet extends HttpServlet {
 			request.setAttribute("imagePath", imagePath);
 			request.setAttribute("lists", lists);
 			request.setAttribute("pageIndexList", pageIndexList);
+			request.setAttribute("dataCount", dataCount);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("currentPage", currentPage);
+
 			
 			url = "/imageTest/list.jsp";
 			forward(request, response, url);
 			
+		}else if(uri.indexOf("delete.do")!=-1) {
+			
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			ImageTestDTO dto = dao.getReadData(num);
 
+
+			FileManager.doFileDelete(dto.getSaveFileName(), path);
+			
+			dao.deleteData(num);
+			
+			url = cp+ "/image/list.do";
+			response.sendRedirect(url);
+			
+			
+			
+			
 			
 		}
 		
