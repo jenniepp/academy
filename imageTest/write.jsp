@@ -9,7 +9,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>이미지 업로드화면(첫화면)</title>
+<title>이미지 업로드화면(첫화면) </title>
+<!--여기까지도 pageNum데이터 온다. -->
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/imageTest/data/style.css"/>
 <script type="text/javascript" src="<%=cp%>/imageTest/data/image.js"></script>
@@ -51,6 +52,8 @@ enctype="multipart/form-data">
 	
 <table style="margin: auto;">
 	<tr><td>
+		<input type="hidden" name="pageNum" value="${pageNum}"/>
+		<!-- hidden으로 하면 데이터가 넘어가지 않음. 이거 물어보기!!! -->
 		<input class="btn2" type="submit" value="등록하기" onclick="sendIt();"/>
 		<input class="btn2" type="button" value="다시입력" onclick="location='<%=cp%>/image/write.do';"/>
 		<input class="btn2" type="button" value="작성취소" onclick="location='<%=cp%>/image/list.do';"/>
