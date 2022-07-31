@@ -23,41 +23,37 @@
 	</td></tr>
 	
 	<tr>
-		<td align="left" colspan="1"><br/>
-		total : ${dataCount } articles, ${totalPage }page / Now page is ${currentPage}
-		</td>
-		<td align="right" colspan="1"><br/>
-		<input type="button" value="게시물 등록" onclick="location='<%=cp%>/image/write.do';"/>
-		</td>
+		
 	</tr>
 </table>
 
 <br/><br/>
 
-<table  style="margin: auto;">
-
-
+<table  style="margin: auto;" width="500">
+	<tr>
+	<td align="left" colspan="2"  width="165">
+		total : ${dataCount } articles, ${totalPage }page / Now page is ${currentPage}
+		</td>
+		<td align="right" colspan="1" width="165">
+		<input type="button" value="게시물 등록" onclick="location='<%=cp%>/image/write.do?pageNum=${pageNum }';"/>
+		</td>
+		</tr>
 
 <c:forEach var="dto" items="${lists }" varStatus="status">
 	<c:if test="${status.count%3 == '1'}">
 	<tr>
 	</c:if>
-		<td width="155" align="center">
-		<img src="${imagePath }/${dto.saveFileName}" width="150" height="200"/>
+		<td width="155" align="left">
+		<img src="${imagePath }/${dto.saveFileName}" width="160" height="200"/>
 		<br/>${dto.subject }
-		<a href="<%=cp%>/image/delete.do?num=${dto.num}" >삭제</a></td>
+		<a href="<%=cp%>/image/delete.do?num=${dto.num }&pageNum=${pageNum } ">삭제</a></td>
 	<c:if test="${status.count%3 == '0'}">
 	</tr>
 	</c:if>	
 </c:forEach>
 
-	<c:if test="${dataCount%3==1 }">
-	<td width="155" ></td>
-	<td width="155" ></td>
-	</c:if>
-	<c:if test="${dataCount%3==2 }">
-	<td width="155" ></td>
-	</c:if>
+<!-- 애초에 칸 3개짜리 테이블을 만들어노코 시작하면 해결됨. 선이든 뭐든 테이블로 규격을 짜자 공백도 하나의 큰 테이블인걸 잊지말자 -->
+
 </table>
 
 
