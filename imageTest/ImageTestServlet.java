@@ -78,7 +78,7 @@ public class ImageTestServlet extends HttpServlet {
 			int maxSize = 10*1024*1024; //사이즈 제한 주기
 			
 			String pageNum = request.getParameter("pageNum");
-			System.out.println(pageNum);
+			//System.out.println(pageNum); 여기서 널값
 
 			//여기 3줄 이해안감 왜 필요한거?
 			MultipartRequest mr =
@@ -99,7 +99,7 @@ public class ImageTestServlet extends HttpServlet {
 				dao.insertData(dto);
 			}
 
-			url = cp+ "/image/list.do?pageNum="+pageNum;
+			url = cp+ "/image/list.do";
 			response.sendRedirect(url);
 			
 			
