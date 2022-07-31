@@ -58,7 +58,16 @@ public class ImageTestServlet extends HttpServlet {
 
 		
 		if(uri.indexOf("write.do")!=-1) {
-
+			
+			String pageNum = request.getParameter("pageNum");
+			
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			
+			request.setAttribute("pageNum", pageNum);
+			
+			//System.out.println(pageNum); 여기까지 pageNum들어옴
 			url = "/imageTest/write.jsp";
 			forward(request, response, url);
 			
@@ -67,6 +76,9 @@ public class ImageTestServlet extends HttpServlet {
 
 			String encType = "UTF-8"; //한글파일도 읽어주려고 쓰는 인코딩코드
 			int maxSize = 10*1024*1024; //사이즈 제한 주기
+			
+			String pageNum = request.getParameter("pageNum");
+			System.out.println(pageNum);
 
 			//여기 3줄 이해안감 왜 필요한거?
 			MultipartRequest mr =
@@ -87,7 +99,7 @@ public class ImageTestServlet extends HttpServlet {
 				dao.insertData(dto);
 			}
 
-			url = cp+ "/image/list.do";
+			url = cp+ "/image/list.do?pageNum="+pageNum;
 			response.sendRedirect(url);
 			
 			
@@ -104,10 +116,14 @@ public class ImageTestServlet extends HttpServlet {
 			//하 이건 또 뭐임 ㅅㅂ 어따쓰는거지?
 			//request.setAttribute("deletePath", deletePath);
 			
+			
 			String pageNum = request.getParameter("pageNum");
+			
 			int currentPage =1;
 			if(pageNum!=null) {
 				currentPage = Integer.parseInt(pageNum);
+			}else { 
+				pageNum="1";
 			}
 			
 			int numPerPage=9;
@@ -134,14 +150,18 @@ public class ImageTestServlet extends HttpServlet {
 			request.setAttribute("dataCount", dataCount);
 			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("pageNum", pageNum);
+			
 
 			
 			url = "/imageTest/list.jsp";
 			forward(request, response, url);
 			
 		}else if(uri.indexOf("delete.do")!=-1) {
-			
+		
 			int num = Integer.parseInt(request.getParameter("num"));
+			String pageNum="1";
+			pageNum = request.getParameter("pageNum");
 			
 			ImageTestDTO dto = dao.getReadData(num);
 
@@ -150,7 +170,7 @@ public class ImageTestServlet extends HttpServlet {
 			
 			dao.deleteData(num);
 			
-			url = cp+ "/image/list.do";
+			url = cp+ "/image/list.do?pageNum="+pageNum;
 			response.sendRedirect(url);
 			
 			
